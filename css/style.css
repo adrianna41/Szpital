@@ -1,0 +1,162 @@
+* {
+	text-decoration: none;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	background-color: rgb(237, 245, 255);
+}
+
+body nav{
+    padding-top: 0.3rem;
+    text-align: center;
+    margin: 1rem;
+}
+
+body nav a{
+    margin: 0 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(7, 59, 95);
+    display: inline-block;
+    transition: 0.2s ease;
+    padding: 0.2rem 0.2rem;
+}
+
+body nav a:hover{
+    transform: scale(1.20);
+    text-decoration-line: unset;
+    color: rgb(26, 35, 159);
+    background-color: #fdfdfdca;
+    border-radius: 10%;
+}
+
+nav a.active{
+    color: rgb(26, 35, 159);
+}
+
+body h1{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(7, 59, 95);
+    font-size: 2rem
+}
+
+/* Strona główna */
+.main-page{
+    background-image: url(../img/szpital-grafika.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main-page-text-box{
+    display: flex;
+}
+
+.main-page-text{
+    padding: 1.4rem 1.8rem;
+    margin-top: 3rem;
+    margin-left: 3.5rem;
+    background-color: bisque;
+    border-radius: 5%;
+    border: 3px solid rgb(7, 59, 95);
+    display: inline-block;
+}
+
+@media(max-width: 1040px){
+    .main-page-text-box{
+        flex-direction: column;
+    }
+
+    .main-page-text{
+        max-width: 25%;
+        padding-left: 0.2rem;
+    }
+
+    .main-page-text > h1{
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+}
+
+/*kontakt*/
+.contact-containter{
+    display: flex;
+    justify-content: center;
+}
+
+.contact-text{
+    padding-left: 2rem;
+    border-left: 3px solid rgb(7, 59, 95);
+    margin-top: 5%;
+}
+
+/* Rejestracja */
+
+
+/*Logowanie*/
+.logowanie-rejestracja{
+    background-image: url(../img/rejestracja_szpital.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logowanie-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 6.5rem
+
+}
+
+.logowanie-text-box{
+    padding: 2rem 2rem;
+    border: 2px solid rgb(7, 59, 95);
+    border-radius: 5%;
+    width: 25%;
+    background-color: rgba(93, 113, 123, 0.96);
+}
+
+
+.logowanie-text-box form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.logowanie-text-box h1{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(7, 59, 95);
+    font-size: 2rem;
+    text-align: center;
+}
+
+.logowanie-text-box input{
+    display: flex;
+    width: 95%;
+    height: 2.5rem;
+    background-color: rgb(203, 216, 230);
+    border: 2px solid rgb(7, 59, 95);
+    border-radius: 4rem;
+}
+
+.logowanie-text-box a{
+    width: 50%;
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    display: inline-block;
+    padding: 0.8rem 0.2rem;
+    border-radius: 3rem;
+    color: black;
+    border: 2px solid rgb(7, 59, 95);
+    text-align: center;
+}
+
+.button:hover{
+    color: white;
+    background-color: rgb(7, 59, 95);
+}
