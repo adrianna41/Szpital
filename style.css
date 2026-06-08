@@ -383,3 +383,52 @@ code {
 .opis2{
     text-align: center;
 }
+
+
+
+/* responsywność */
+
+
+@media (max-width: 768px) {
+    .wstep, .wstep1, .wstep2, dialog {
+        width: 90%; 
+        padding: 15px; 
+    }
+    .wstep h1, .wstep1 h1, .wstep2 h1 {
+        font-size: 40px;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    .opis1, .log2 {
+        grid-template-columns: 1fr;
+    }
+    .batony, .batony1 {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .log input[type="email"],
+    .log input[type="password"],
+    .log input[type="text"],
+    .log2 input[type="email"],
+    .log2 input[type="password"],
+    .log2 input[type="text"] {
+        width: 100%;
+        max-width: 300px;
+    }
+    .opis {
+        flex-direction: column;
+        margin-left: 0;
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+    }
+    .opis2 {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
