@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+
+    <div class="wstep">
+            <h1>Dokumentacja</h1>
+            <h2>
+                <p>Cel Projektu:</p>
+                Baza danych do zarządzania szpitalem ma na celu wsprzeć zarówno lekarzy w ich codziennej pracy,
+                jak i umożliwić pacjentom umawianie wizyt oraz sprawdzanie swoich danych medycznych,
+                a także ma umożliwiać planowanie grafików sal i wizyt oraz rejeresować dane o pracownikach
+                i pacjentach.
+            </h2>
+
+            <div class="strzalka">
+            <a href="#sekcja1"><i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+            
+
+    </div>
+
+    <dialog id="spis">
+    <h3>Spis treści</h3>
+    
+
+
+
+    <nav class="sekcja">
+        <!-- <a href="#sekcja1" onclick="spis.close()">Cel Projektu</a> -->
+        <a href="#sekcja1" onclick="spis.close()">Funkcjonalności realizowane przez system</a>
+        <a href="#sekcja2" onclick="spis.close()">Diagram przypadków użycia</a>
+        <a href="#sekcja3" onclick="spis.close()">Diagram ERD</a>
+        <a href="#sekcja4" onclick="spis.close()">Encje</a>
+        <a href="#sekcja5" onclick="spis.close()">Słowniki danych</a>
+        <a href="#sekcja6" onclick="spis.close()">Implementacja</a>
+        <a href="#sekcja7" onclick="spis.close()">Zapytania, procedury i funkcje</a>
+        <a href="#sekcja8" onclick="spis.close()">Mechanizmy bezpieczeństwa i administracji</a>
+    </nav>
+    <div class="batony1">
+    <button onclick="spis.close()">Zamknij</button>
+    </div>
+    </dialog>
+
+    <div class="batony">
+        <button onclick="spis.showModal()">Spis treści</button>
+    </div>
+    
+
+
+    <div class="dok">
+        <section id="sekcja1">
+            <h2>Funkcjonalności realizowane przez system: </h2>
+            <ul>
+            <!-- <li>Funkcjonalności realizowane przez system:</li> -->
+            <li>Rejestracja i logowanie pacjenta</li>
+            <li>Dodawanie nowych pracowników przez administratora systemu</li>
+            <li>Umówienie się pacjenta na wizytę do specjalisty</li>
+            <li>Wyświetlenie danych pacjenta (na jego koncie) m.in informacji dotyczących wizyt, chorób, historii hospitalizacji, skierowań i recept</li>
+            <li>Tworzenie recept, diagnoz i skierowań przez lekarzy</li>
+            <li>Wyświetlanie statystyk, informacji o chorobach</li>
+            <li>Ustalanie grafików sal/wizyt przez administratora</li>
+            </ul>
+        </section>
+
+        <section class="imgg" id="sekcja2">
+            <h2>Diagram przypadków użycia systemu szpitala:</h2>
+            <p>
+                <img src="use_case_szpital (1).png" alt="Diagram przypadków użycia systemu szpitala">
+            </p>
+        </section>
+
+        <section class="imgg" id="sekcja3">
+            <h2>Diagram ERD bazy danych:</h2>
+            <p>
+                <img src="diagram_erd_szpital.png" alt="Diagram ERD bazy danych">
+            </p>
+        </section>
+
+
+        <section id="sekcja4">
+            <h2>Encje</h2>
+            <h3>Skrypt inicjujący strukturę tabel w bazie danych Szpital został wykonany w SQL Server Management Studio.</h3>
+            <h3>Rdzeniem bazy jest tabela WIZYTA, ponieważ celem szpitala jest przyjmowanie pacjentów na wizyty w celu weryfikacji ich zdrowia. Encja ta jest powiązana z encjami  PACJENT, PRACOWNIK i SALA a także tylko dzięki zrealizowanej wizycie jest możliwe stawianie diagnoz i wystawienie recept przez lekarzy. </h3>
+            <div class="opis1">
+        
+        <div class="nauka1">
+            <h1>ODDZIAL</h1>
+            <p>zawiera nazwy wszystkich oddziałów szpitala<p>
+        </div>
+        <div class="nauka1">
+            <h1>STANOWISKO</h1>
+            <p>tabela przechowująca informacje o nazwach stanowisk w szpitalu i pensjach, które odpowiadają danemu stanowisku</p>
+        </div>
+        <div class="nauka1">
+            <h1>CHOROBA</h1>
+            <p>Zawiera nazwy chorób</p>
+        </div>
+        <div class="nauka1">
+            <h1>SALA</h1>
+            <p>posiada informacje o pomieszczeniach w szpitalu: numer sali, jej rola oraz do jakiego oddziału jest przypisana</p>
+        </div>
+        <div class="nauka1">
+            <h1>UZYTKOWNIK</h1>
+            <p>encja przechowuje dane do logowania użytkowników systemu: administratorów, lekarzy i pacjentów. Zawiera unikalny numer użytkownika, login, hash hasła oraz rolę przypisaną użytkownikowi. </p>
+        </div>
+
+
+        <div class="nauka1">
+            <h1>PRACOWNIK</h1>
+            <p>przechowuje informacje o pracownikach szpitala: numer identyfikacyjny pracownika, imię, nazwisko, obejmowane stanowisko, oddział, do którego pracownik jest przypisany, datę zatrudnienia, numer użytkownika systemu (jeśli stanowisko pracownika to administrator lub lekarz)<p>
+        </div>
+        <div class="nauka1">
+            <h1>PACJENT</h1>
+            <p>encja przechowująca dane pacjentów: numer identyfikacyjny pacjenta, imię, nazwisko, numer PESEL, numer telefonu, adres, numer użytkownika systemu</p>
+        </div>
+        <div class="nauka1">
+            <h1>WIZYTA</h1>
+            <p>tabela zawierająca informacje o umówionych wizytach: numer pacjenta, który umówił wizytę, numer lekarza przypisanego do wizyty, numer sali (jeśli wizyta nie jest konsultacją zdalną), datę i godzinę wizyty oraz jej status</p>
+        </div>
+        <div class="nauka1">
+            <h1>GRAFIK</h1>
+            <p>encja, która odpowiada za przypisywanie godzin pracy pracownikom w poszczególne dni. Zawiera atrybuty: numer identyfikacyjny pracownika, identyfikator sali, data i godzina rozpoczęcia pracy, data i godzina zakończenia pracy pracownika</p>
+        </div>
+        <div class="nauka1">
+            <h1>SKIEROWANIE</h1>
+            <p>przechowuje dane z wystawionych przez lekarzy skierowań: dane pacjenta, który otrzymał skierowanie, lekarza, który wydał skierowanie oraz informacje do jakiego specjalisty pacjent powinien się udać, a także datę wystawienia skierowania </p>
+        </div>
+        <div class="nauka1">
+            <h1>DIAGNOZA</h1>
+            <p>umieszczane są w niej dane o diagnozach pacjentów, zawiera informacje o nazwie choroby, wizycie, na której postawiono diagnozę oraz opis diagnozy.</p>
+        </div>
+        <div class="nauka1">
+            <h1>RECEPTA</h1>
+            <p>przechowuje recepty, które zostały wystawione przez lekarzy. Jest powiązana z diagnozą i zawiera informacje o lekach, które pacjent powinien wykupić oraz posiada datę wystawienia.</p>
+        </div>
+
+        </div>
+
+        </section>
+
+
+        <section id="sekcja5">
+            <h2>Słowniki danych</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat similique a inventore iure repellat in fugiat culpa dignissimos, dicta nostrum aliquid, dolore, tempore corrupti eius! Ex iure odit suscipit at?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quis ad illo! Voluptates, totam labore. Explicabo, tempora temporibus voluptas vitae iure non blanditiis eos adipisci asperiores? Consequuntur illo ab quo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ex incidunt voluptas itaque numquam quos esse dolorum, harum, autem quibusdam repudiandae, dolor sint impedit! Magni debitis tempore fugit voluptatibus libero?</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illum, perspiciatis tempore asperiores similique cumque, soluta quibusdam dicta earum, labore minus quia? Natus commodi nostrum ab exercitationem quos ad nisi?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium culpa vitae consequuntur at reprehenderit! Ex, sed, sapiente voluptates voluptatem velit ipsa soluta rerum, tenetur cupiditate perferendis aut dicta perspiciatis sequi.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis cum sapiente aut ducimus. Consectetur ratione nulla, nobis distinctio labore quia illum! Quas, veniam? Officiis aliquid ab ipsum minus culpa aut.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam pariatur quia ea quam unde delectus perferendis inventore blanditiis culpa nostrum, odit itaque? Veniam molestiae, suscipit ducimus assumenda voluptatum neque nobis.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus, atque, quos nihil cupiditate blanditiis quidem tempora itaque quae iste soluta sit dolore ipsum eligendi ab magnam ipsa, esse nesciunt.</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt consequatur eveniet excepturi eum distinctio unde et tenetur dignissimos magni, cum facilis a delectus beatae, itaque exercitationem consectetur facere enim similique?</p>
+        </section>
+
+        <section id="sekcja6">
+            <h2>Kod do stworzenia bazy</h2>
+            <pre><code>
+                CREATE DATABASE Szpital;
+                USE Szpital;
+
+                CREATE TABLE ODDZIAL (
+                    od_id INT IDENTITY(1,1) PRIMARY KEY,
+                    od_nazwa NVARCHAR(100) NOT NULL
+                );
+
+                CREATE TABLE STANOWISKO (
+                    st_id INT IDENTITY(1,1) PRIMARY KEY,
+                    st_nazwa NVARCHAR(50) NOT NULL,
+                    st_pensja DECIMAL(10, 2)
+                );
+
+                CREATE TABLE CHOROBA (
+                    ch_id INT IDENTITY(1,1) PRIMARY KEY,
+                    ch_nazwa NVARCHAR(100) NOT NULL
+                );
+
+                CREATE TABLE SALA (
+                    s_id INT IDENTITY(1,1) PRIMARY KEY,
+                    s_oddzial_id INT NOT NULL REFERENCES ODDZIAL(od_id),
+                    s_numer NVARCHAR(10) NOT NULL,
+                    s_rola NVARCHAR(50)
+                );
+
+                CREATE TABLE UZYTKOWNIK (
+                    u_id INT IDENTITY(1,1) PRIMARY KEY,
+                    u_login NVARCHAR(50) UNIQUE NOT NULL,
+                    u_haslo_hash NVARCHAR(255) NOT NULL,
+                    u_rola NVARCHAR(20) NOT NULL CHECK (u_rola IN ('admin', 'lekarz', 'pacjent'))
+                );
+
+                CREATE TABLE PRACOWNIK (
+                    pr_id INT IDENTITY(1,1) PRIMARY KEY,
+                    pr_imie NVARCHAR(50) NOT NULL,
+                    pr_nazwisko NVARCHAR(50) NOT NULL,
+                    pr_stanowisko_id INT NOT NULL REFERENCES STANOWISKO(st_id),
+                    pr_oddzial_id INT NOT NULL REFERENCES ODDZIAL(od_id),
+                    pr_data_zatrudnienia DATE NOT NULL default getdate(),
+                    pr_uzytkownik_id INT UNIQUE REFERENCES UZYTKOWNIK(u_id)
+                );
+
+                CREATE TABLE PACJENT (
+                    p_id INT IDENTITY(1,1) PRIMARY KEY,
+                    p_imie NVARCHAR(50) NOT NULL,
+                    p_nazwisko NVARCHAR(50) NOT NULL,
+                    p_pesel NVARCHAR(11) UNIQUE NOT NULL,
+                    p_nr_tel NVARCHAR(15),
+                    p_adres NVARCHAR(300),
+                    p_uzytkownik_id INT UNIQUE REFERENCES UZYTKOWNIK(u_id)
+
+                );
+
+                CREATE TABLE WIZYTA (
+                    w_id INT IDENTITY(1,1) PRIMARY KEY,
+                    w_pacjent_id INT NOT NULL REFERENCES PACJENT(p_id),
+                    w_lekarz_id INT NOT NULL REFERENCES PRACOWNIK(pr_id),
+                    w_sala_id INT REFERENCES SALA(s_id),
+                    w_data_godzina DATETIME NOT NULL,
+                    w_status NVARCHAR(20) DEFAULT 'umówiona'
+                );
+
+
+                CREATE TABLE GRAFIK (
+                    g_id INT IDENTITY(1,1) PRIMARY KEY,
+                    g_pracownik_id INT NOT NULL REFERENCES PRACOWNIK(pr_id),
+                    g_sala_id INT NOT NULL REFERENCES SALA(s_id),
+                    g_start DATETIME NOT NULL,
+                    g_koniec DATETIME NOT NULL
+                );
+
+
+                CREATE TABLE SKIEROWANIE (
+                    ski_id INT IDENTITY(1,1) PRIMARY KEY,
+                    ski_pacjent_id INT NOT NULL REFERENCES PACJENT(p_id) ,
+                    ski_lekarz_id INT NOT NULL REFERENCES PRACOWNIK(pr_id),
+                    ski_do_specjalisty NVARCHAR(100) NOT NULL,
+                    ski_data_wystawienia DATE NOT NULL DEFAULT GETDATE()
+                );
+
+                CREATE TABLE DIAGNOZA (
+                    dia_id INT IDENTITY(1,1) PRIMARY KEY,
+                    dia_wizyta_id INT NOT NULL REFERENCES WIZYTA(w_id),
+                    dia_choroba_id INT NOT NULL REFERENCES CHOROBA(ch_id),
+                    dia_opis NVARCHAR(2500)
+                );
+
+
+                CREATE TABLE RECEPTA (
+                    r_id INT IDENTITY(1,1) PRIMARY KEY,
+                    r_diagnoza_id INT NOT NULL REFERENCES DIAGNOZA(dia_id),
+                    r_leki NVARCHAR(1300) NOT NULL,
+                    r_data_wystawienia DATE NOT NULL DEFAULT GETDATE()
+                );
+
+            </code></pre>
+            <h2>Inserty</h2>
+            <pre><code>
+                use Szpital;
+                insert into ODDZIAL 
+                values('Szpitalny Oddział Ratunkowy'),
+                ('Oddział Intensywnej Terapii'),
+                ('Izba Przyjęć'),
+                ('Oddział Kardiologiczny'),
+                ('Oddział Neurologiczny'),
+                ('Oddział Pediatryczny'),
+                ('Oodział Psychiatryczny'),
+                ('Oddział Onkologiczny'),
+                ('Oddział Zakaźny'),
+                ('Oddział Punmonologiczny'),
+                ('Oddział Geriatryczny'),
+                ('Oddział Chirurgii Ogólnej'),
+                ('Oddział Chirurgii Dziecięcej'),
+                ('Oddział Laryngologiczny'),
+                ('Oddział Neurochirurgiczny'),
+                ('Oddział Okulistyczny'),
+                ('Oddział Położniczy'),
+                ('Oddział Urologiczny');
+
+                insert into STANOWISKO
+                values
+                    ('Ordynator', 18500.00),
+                    ('Lekarz specjalista', 14000.00),
+                    ('Lekarz rezydent', 8500.00),
+                    ('Lekarz stażysta', 6000.00),
+                    ('Pielęgniarka oddziałowa', 9500.00),
+                    ('Pielęgniarka', 7500.00),
+                    ('Położna', 7500.00),
+                    ('Ratownik medyczny', 7000.00),
+                    ('Diagnosta laboratoryjny', 7200.00),
+                    ('Technik elektroradiolog', 6800.00),
+                    ('Fizjoterapeuta', 6500.00),
+                    ('Psycholog kliniczny', 7000.00),
+                    ('Dietetyk kliniczny', 6000.00),
+                    ('Farmaceuta szpitalny', 8000.00),
+                    ('Opiekun medyczny', 5500.00),
+                    ('Sanitariusz', 5000.00),
+                    ('Salowa', 4500.00),
+                    ('Rejestrator medyczny', 4800.00),
+                    ('Dyrektor Szpitala', 25000.00),
+                    ('Dyrektor ds. Medycznych', 22000.00);
+
+                INSERT INTO CHOROBA 
+                VALUES
+                    ('Nadciśnienie tętnicze'),
+                    ('Zawał mięśnia sercowego'),
+                    ('Niewydolność serca'),
+                    ('Migotanie przedsionków'),
+                    ('Udar niedokrwienny mózgu'),
+                    ('Stwardnienie rozsiane (SM)'),
+                    ('Padaczka'),
+                    ('Wstrząśnienie mózgu'),
+                    ('Zapalenie płuc'),
+                    ('Przewlekła obturacyjna choroba płuc (POChP)'),
+                    ('Astma oskrzelowa'),
+                    ('COVID-19'),
+                    ('Grypa'),
+                    ('Ostre zapalenie wyrostka robaczkowego'),
+                    ('Kamica pęcherzyka żółciowego'),
+                    ('Choroba wrzodowa żołądka i dwunastnicy'),
+                    ('Przepuklina pachwinowa'),
+                    ('Złamanie kości udowej'),
+                    ('Zwichnięcie stawu barkowego'),
+                    ('Zerwanie więzadła krzyżowego przedniego (ACL)'),
+                    ('Nowotwór złośliwy płuca'),
+                    ('Rak piersi'),
+                    ('Rak gruczołu krokowego'),
+                    ('Przewlekła niewydolność nerek'),
+                    ('Zakażenie układu moczowego (ZUM)'),
+                    ('Kamica nerkowa'),
+                    ('Zaburzenia depresyjne'),
+                    ('Schizofrenia'),
+                    ('Zaćma'),
+                    ('Jaskra'),
+                    ('Przerost migdałków podniebiennych'),
+                    ('Przewlekłe zapalenie zatok');
+
+                    INSERT INTO SALA (s_oddzial_id, s_numer, s_rola)
+                    VALUES
+                    (1, 'SOR-01', 'Triage / Kwalifikacja'),
+                    (1, 'SOR-02', 'Sala reanimacyjna'),
+                    (1, 'SOR-03', 'Gabinet zabiegowy chirurgiczny'),
+                    (2, 'OIT-1', 'Sala intensywnej terapii (stanowiska 1-4)'),
+                    (2, 'OIT-IZO', 'Izolatka OIT'),
+                    (3, 'IP-01', 'Punkt rejestracji i przyjęć planowych'),
+                    (4, '101', 'Sala chorych (2-osobowa)'),
+                    (4, '102', 'Sala Intensywnego Nadzoru Kardiologicznego'),
+                    (4, 'GAB-EKG', 'Pracownia EKG i UKG (Echo serca)'),
+                    (5, '201', 'Sala chorych (3-osobowa) - Pododdział Udarowy'),
+                    (6, '301', 'Sala chorych (niemowlęta)'),
+                    (6, '302', 'Świetlica / Pokój zabaw dla dzieci'),
+                    (8, '401', 'Sala Chemioterapii Dziennej'),
+                    (9, 'IZO-1', 'Izolatka ze śluzą podciśnieniową'),
+                    (12, 'BL-01', 'Sala operacyjna główna'),
+                    (12, 'BL-02', 'Sala operacyjna "ostra"'),
+                    (12, 'POP-1', 'Sala wybudzeń (Post-Anesthesia Care Unit)'),
+                    (15, 'NCH-BL', 'Sala operacyjna neurochirurgiczna (z mikroskopem)'),
+                    (17, 'POL-01', 'Sala porodowa rodzinna'),
+                    (17, 'CC-01', 'Sala Cięć Cesarskich');
+
+
+            </code></pre>
+            <div class="opis2">
+                <a href="tworzenie_bazy.zip" download class="download-btn">
+                    Pobierz Kod
+                </a>
+                <!-- <a href="inserty_tabel_bez_kluczy_obcych.sql" download class="download-btn">
+                    Pobierz Inserty
+                </a> -->
+            </div>
+        </section>
+
+
+        
+
+
+
+        <section id="sekcja7">
+            <h2>Zapytania, procedury i funkcje</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat similique a inventore iure repellat in fugiat culpa dignissimos, dicta nostrum aliquid, dolore, tempore corrupti eius! Ex iure odit suscipit at?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quis ad illo! Voluptates, totam labore. Explicabo, tempora temporibus voluptas vitae iure non blanditiis eos adipisci asperiores? Consequuntur illo ab quo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ex incidunt voluptas itaque numquam quos esse dolorum, harum, autem quibusdam repudiandae, dolor sint impedit! Magni debitis tempore fugit voluptatibus libero?</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illum, perspiciatis tempore asperiores similique cumque, soluta quibusdam dicta earum, labore minus quia? Natus commodi nostrum ab exercitationem quos ad nisi?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium culpa vitae consequuntur at reprehenderit! Ex, sed, sapiente voluptates voluptatem velit ipsa soluta rerum, tenetur cupiditate perferendis aut dicta perspiciatis sequi.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis cum sapiente aut ducimus. Consectetur ratione nulla, nobis distinctio labore quia illum! Quas, veniam? Officiis aliquid ab ipsum minus culpa aut.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam pariatur quia ea quam unde delectus perferendis inventore blanditiis culpa nostrum, odit itaque? Veniam molestiae, suscipit ducimus assumenda voluptatum neque nobis.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus, atque, quos nihil cupiditate blanditiis quidem tempora itaque quae iste soluta sit dolore ipsum eligendi ab magnam ipsa, esse nesciunt.</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt consequatur eveniet excepturi eum distinctio unde et tenetur dignissimos magni, cum facilis a delectus beatae, itaque exercitationem consectetur facere enim similique?</p>
+        </section>
+
+
+        <section id="sekcja8">
+            <h2>Mechanizmy bezpieczeństwa i administracji</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat similique a inventore iure repellat in fugiat culpa dignissimos, dicta nostrum aliquid, dolore, tempore corrupti eius! Ex iure odit suscipit at?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quis ad illo! Voluptates, totam labore. Explicabo, tempora temporibus voluptas vitae iure non blanditiis eos adipisci asperiores? Consequuntur illo ab quo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ex incidunt voluptas itaque numquam quos esse dolorum, harum, autem quibusdam repudiandae, dolor sint impedit! Magni debitis tempore fugit voluptatibus libero?</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illum, perspiciatis tempore asperiores similique cumque, soluta quibusdam dicta earum, labore minus quia? Natus commodi nostrum ab exercitationem quos ad nisi?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium culpa vitae consequuntur at reprehenderit! Ex, sed, sapiente voluptates voluptatem velit ipsa soluta rerum, tenetur cupiditate perferendis aut dicta perspiciatis sequi.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis cum sapiente aut ducimus. Consectetur ratione nulla, nobis distinctio labore quia illum! Quas, veniam? Officiis aliquid ab ipsum minus culpa aut.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam pariatur quia ea quam unde delectus perferendis inventore blanditiis culpa nostrum, odit itaque? Veniam molestiae, suscipit ducimus assumenda voluptatum neque nobis.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus, atque, quos nihil cupiditate blanditiis quidem tempora itaque quae iste soluta sit dolore ipsum eligendi ab magnam ipsa, esse nesciunt.</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt consequatur eveniet excepturi eum distinctio unde et tenetur dignissimos magni, cum facilis a delectus beatae, itaque exercitationem consectetur facere enim similique?</p>
+        </section>
+
+
+        
+
+     <footer>
+        <div class="opis">
+        
+        <div class="nauka">
+            <p>Community</p>
+            <a href=""><i class="fa-brands fa-github"></i></a>
+            <a href=""><i class="fa-brands fa-discord"></i></a>
+            <a href=""><i class="fa-brands fa-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+        
+        <div class="nauka">
+            <p>Programowanie serwera baz danych</p>
+            <p>Dokumentacja projektu zaliczeniowego. Maja & Adrianna</p>
+        </div>
+        <p><i class="fa-regular fa-copyright"></i> Wszelkie prawa zastrzeżone </p>
+    </div>
+    </footer>
+
+    
+
+</body>
+</html>
