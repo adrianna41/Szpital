@@ -48,6 +48,7 @@
         <a href="#sekcja6" onclick="spis.close()">Implementacja</a>
         <a href="#sekcja7" onclick="spis.close()">Zapytania, procedury i funkcje</a>
         <a href="#sekcja8" onclick="spis.close()">Mechanizmy bezpieczeństwa i administracji</a>
+        <a href="#sekcja9" onclick="spis.close()">Pobierz ZIP 🐈</a>
     </nav>
     <div class="batony1">
     <button onclick="spis.close()">Zamknij</button>
@@ -301,14 +302,7 @@
             <p>Plik: <code>szpital_skrypt_inicjalizujacy.sql</code></p>
             <p>Plik zawiera skrypt inicjalizujący bazę danych Szpital. Po uruchomieniu go w Microsoft SQL Server utworzą się tabele oraz zostaną wypełnione danymi. Skrypt został wygenerowany za pomocą narzędzia Microsoft SQL Server na utworzonej bazie danych Szpital.</p>
             
-            <div class="opis2">
-                <a href="tworzenie_bazy.zip" download class="download-btn">
-                    Pobierz Kod
-                </a>
-                <!-- <a href="inserty_tabel_bez_kluczy_obcych.sql" download class="download-btn">
-                    Pobierz Inserty
-                </a> -->
-            </div>
+            
         </section>
 
 
@@ -400,6 +394,25 @@
                 <li><strong><code>trg_DDL_Klinika_Audit</code>:</strong> Założony na poziomie całej bazy danych. Używając funkcji <code>EVENTDATA()</code>, przechwytuje zapytania tworzące nowe tabele i zapisuje ich strukturę oraz dokładny kod T-SQL do specjalnego logu XML. Jest narzędziem dla administratora.</li>
             </ul>
         </section>
+
+        
+        <section id="sekcja9">
+            <h2>Plik ZIP</h2>
+            
+            <div class="opis2">
+                <a href="Projekt-szpital-dokumentacja.zip" download class="download-btn">
+                    Pobierz plik ZIP
+                </a>
+                <!-- <a href="inserty_tabel_bez_kluczy_obcych.sql" download class="download-btn">
+                    Pobierz Inserty
+                </a> -->
+            </div>
+
+        </section>
+        
+
+
+
 
 
         
