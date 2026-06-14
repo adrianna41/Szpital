@@ -154,19 +154,34 @@
 
         <section id="sekcja5">
             <h2>Słowniki danych</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat similique a inventore iure repellat in fugiat culpa dignissimos, dicta nostrum aliquid, dolore, tempore corrupti eius! Ex iure odit suscipit at?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quis ad illo! Voluptates, totam labore. Explicabo, tempora temporibus voluptas vitae iure non blanditiis eos adipisci asperiores? Consequuntur illo ab quo.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ex incidunt voluptas itaque numquam quos esse dolorum, harum, autem quibusdam repudiandae, dolor sint impedit! Magni debitis tempore fugit voluptatibus libero?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illum, perspiciatis tempore asperiores similique cumque, soluta quibusdam dicta earum, labore minus quia? Natus commodi nostrum ab exercitationem quos ad nisi?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium culpa vitae consequuntur at reprehenderit! Ex, sed, sapiente voluptates voluptatem velit ipsa soluta rerum, tenetur cupiditate perferendis aut dicta perspiciatis sequi.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis cum sapiente aut ducimus. Consectetur ratione nulla, nobis distinctio labore quia illum! Quas, veniam? Officiis aliquid ab ipsum minus culpa aut.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam pariatur quia ea quam unde delectus perferendis inventore blanditiis culpa nostrum, odit itaque? Veniam molestiae, suscipit ducimus assumenda voluptatum neque nobis.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus, atque, quos nihil cupiditate blanditiis quidem tempora itaque quae iste soluta sit dolore ipsum eligendi ab magnam ipsa, esse nesciunt.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt consequatur eveniet excepturi eum distinctio unde et tenetur dignissimos magni, cum facilis a delectus beatae, itaque exercitationem consectetur facere enim similique?</p>
+            <p>Tabela ODDZIAL</p>
+            <img src="img/slownik_oddzial.png" alt="Słownik ODDZIAL">
+            <p>Tabela STANOWISKO</p>
+            <img src="img/slownik_stanowisko.png" alt="Słownik STANOWISKO">
+            <p>Tabela CHOROBA</p>
+            <img src="img/slownik_choroba.png" alt="Słownik CHOROBA">
+            <p>Tabela SALA</p>
+            <img src="img/slownik_sala.png" alt="Słownik SALA">
+            <p>Tabela UZYTKOWNIK</p>
+            <img src="img/slownik_uzytkownik.png" alt="Słownik UZYTKOWNIK">
+            <p>Tabela PRACOWNIK</p>
+            <img src="img/slownik_pracownik.png" alt="Słownik PRACOWNIK">
+            <p>Tabela PACJENT</p>
+            <img src="img/slownik_pacjent.png" alt="Słownik PACJENT">
+            <p>Tavela WIZYTA</p>
+            <img src="img/slownik_wizyta.png" alt="Słownik WIZYTA">
+            <p>Tabela GRAFIK</p>
+            <img src="img/slownik_grafik.png" alt="Słownik GRAFIK">
+            <p>Tabela SKIEROWANIE</p>
+            <img src="img/slownik_skierowanie.png" alt="Słownik SKIEROWANIE">
+            <p>Tabela DIAGNOZA</p>
+            <img src="img/slownik_diagnoza.png" alt="Słownik DIAGNOZA">
+            <p>Tabela RECEPTA</p>
+            <img src="img/slownik_recepta.png" alt="Słownik RECEPTA">
         </section>
 
         <section id="sekcja6">
-            <h2>Kod do stworzenia bazy</h2>
+            <h2>Kod do stworzenia bazy w MS SQL Server</h2>
             <pre><code>
                 CREATE DATABASE Szpital;
                 USE Szpital;
@@ -265,112 +280,27 @@
                 );
 
             </code></pre>
-            <h2>Inserty</h2>
-            <pre><code>
-                use Szpital;
-                insert into ODDZIAL 
-                values('Szpitalny Oddział Ratunkowy'),
-                ('Oddział Intensywnej Terapii'),
-                ('Izba Przyjęć'),
-                ('Oddział Kardiologiczny'),
-                ('Oddział Neurologiczny'),
-                ('Oddział Pediatryczny'),
-                ('Oodział Psychiatryczny'),
-                ('Oddział Onkologiczny'),
-                ('Oddział Zakaźny'),
-                ('Oddział Punmonologiczny'),
-                ('Oddział Geriatryczny'),
-                ('Oddział Chirurgii Ogólnej'),
-                ('Oddział Chirurgii Dziecięcej'),
-                ('Oddział Laryngologiczny'),
-                ('Oddział Neurochirurgiczny'),
-                ('Oddział Okulistyczny'),
-                ('Oddział Położniczy'),
-                ('Oddział Urologiczny');
+            <h2>Wstawianie danych do tabel</h2>
+            <p>Plik: <code>dodanie_rekordow.sql</code></p>
+            <p>Wstawianie rekordów zostało podzielone na cztery etapy:</p>
+            <ul>
+                <li><strong>1. Tabele słownikowe (<code>ODDZIAL</code>, <code>STANOWISKO</code>, <code>CHOROBA</code>, <code>SALA</code>):</strong><br>
+                Dane zostały dodane za pomocą składni <code>INSERT INTO</code>.</li>
+                <br><br>
+                <li><strong>2. Tabele <code>PRACOWNIK</code> i <code>PACJENT</code>:</strong><br>
+                Na początku zostały utworzone pomocnicze funkcje tablicowe (<code>fn_ListaImion()</code>, <code>fn_ListaNazwisk()</code>, <code>fn_ListaImionZ()</code>, <code>fn_ListaNazwiskZ()</code>) przechowujące odpowiednio po 50: imion męskich, nazwisk męskich, imion żeńskich, nazwisk żeńskich. Następnie za pomocą procedur <code>GenerujPracownikow</code>, <code>GenerujPacjentow</code> w losowy sposób wygenerowani zostali pracownicy. Wykorzystana została pętla <code>WHILE</code> oraz obsługa błędów <code>TRY/CATCH</code> do wielokrotnego powtarzania operacji wstawiania <code>INSERT</code>. W każdej iteracji procedura losuje płeć, pobiera odpowiednie imię i nazwisko z wyżej wymienionych funkcji tablicowych, autogeneruje unikalny 11-cyfrowy numer PESEL oraz losowy format numeru telefonu.</li>
+                <br><br>
+                <li><strong>3. Tabela <code>UZYTKOWNICY</code>:</strong><br>
+                Dane kont użytkowników zostały wygenerowane za pomocą zautomatyzowanej procedury składowanej <code>UzupełnijKontaPracownikow</code>, wykorzystującej mechanizm kursora. Procedura ta iteruje po pracownikach wyższego szczebla (lekarzach, ordynatorach i dyrekcji), którzy nie posiadają jeszcze przypisanego konta. Dla każdej takiej osoby skrypt dynamicznie generuje unikalny login (w formacie imię.nazwisko, z obsługą duplikatów), szyfruje domyślne hasło algorytmem SHA-256 oraz nadaje odpowiednią rolę systemową (admin dla dyrekcji, lekarz dla pozostałych). Na sam koniec procedura automatycznie aktualizuje tabelę <code>PRACOWNIK</code>, powiązując nowo utworzone konto z konkretną osobą, co gwarantuje pełną spójność kluczy obcych.</li>
+                <br><br>
+                <li><strong>4. Tabele transakcyjne (<code>WIZYTA</code>, <code>DIAGNOZA</code>, <code>RECEPTA</code>, <code>SKIEROWANIE</code>):</strong><br>
+                Ich rekordy zostały wstawione za pomocą polecenia <code>INSERT INTO</code>.</li>
+            </ul>
 
-                insert into STANOWISKO
-                values
-                    ('Ordynator', 18500.00),
-                    ('Lekarz specjalista', 14000.00),
-                    ('Lekarz rezydent', 8500.00),
-                    ('Lekarz stażysta', 6000.00),
-                    ('Pielęgniarka oddziałowa', 9500.00),
-                    ('Pielęgniarka', 7500.00),
-                    ('Położna', 7500.00),
-                    ('Ratownik medyczny', 7000.00),
-                    ('Diagnosta laboratoryjny', 7200.00),
-                    ('Technik elektroradiolog', 6800.00),
-                    ('Fizjoterapeuta', 6500.00),
-                    ('Psycholog kliniczny', 7000.00),
-                    ('Dietetyk kliniczny', 6000.00),
-                    ('Farmaceuta szpitalny', 8000.00),
-                    ('Opiekun medyczny', 5500.00),
-                    ('Sanitariusz', 5000.00),
-                    ('Salowa', 4500.00),
-                    ('Rejestrator medyczny', 4800.00),
-                    ('Dyrektor Szpitala', 25000.00),
-                    ('Dyrektor ds. Medycznych', 22000.00);
-
-                INSERT INTO CHOROBA 
-                VALUES
-                    ('Nadciśnienie tętnicze'),
-                    ('Zawał mięśnia sercowego'),
-                    ('Niewydolność serca'),
-                    ('Migotanie przedsionków'),
-                    ('Udar niedokrwienny mózgu'),
-                    ('Stwardnienie rozsiane (SM)'),
-                    ('Padaczka'),
-                    ('Wstrząśnienie mózgu'),
-                    ('Zapalenie płuc'),
-                    ('Przewlekła obturacyjna choroba płuc (POChP)'),
-                    ('Astma oskrzelowa'),
-                    ('COVID-19'),
-                    ('Grypa'),
-                    ('Ostre zapalenie wyrostka robaczkowego'),
-                    ('Kamica pęcherzyka żółciowego'),
-                    ('Choroba wrzodowa żołądka i dwunastnicy'),
-                    ('Przepuklina pachwinowa'),
-                    ('Złamanie kości udowej'),
-                    ('Zwichnięcie stawu barkowego'),
-                    ('Zerwanie więzadła krzyżowego przedniego (ACL)'),
-                    ('Nowotwór złośliwy płuca'),
-                    ('Rak piersi'),
-                    ('Rak gruczołu krokowego'),
-                    ('Przewlekła niewydolność nerek'),
-                    ('Zakażenie układu moczowego (ZUM)'),
-                    ('Kamica nerkowa'),
-                    ('Zaburzenia depresyjne'),
-                    ('Schizofrenia'),
-                    ('Zaćma'),
-                    ('Jaskra'),
-                    ('Przerost migdałków podniebiennych'),
-                    ('Przewlekłe zapalenie zatok');
-
-                    INSERT INTO SALA (s_oddzial_id, s_numer, s_rola)
-                    VALUES
-                    (1, 'SOR-01', 'Triage / Kwalifikacja'),
-                    (1, 'SOR-02', 'Sala reanimacyjna'),
-                    (1, 'SOR-03', 'Gabinet zabiegowy chirurgiczny'),
-                    (2, 'OIT-1', 'Sala intensywnej terapii (stanowiska 1-4)'),
-                    (2, 'OIT-IZO', 'Izolatka OIT'),
-                    (3, 'IP-01', 'Punkt rejestracji i przyjęć planowych'),
-                    (4, '101', 'Sala chorych (2-osobowa)'),
-                    (4, '102', 'Sala Intensywnego Nadzoru Kardiologicznego'),
-                    (4, 'GAB-EKG', 'Pracownia EKG i UKG (Echo serca)'),
-                    (5, '201', 'Sala chorych (3-osobowa) - Pododdział Udarowy'),
-                    (6, '301', 'Sala chorych (niemowlęta)'),
-                    (6, '302', 'Świetlica / Pokój zabaw dla dzieci'),
-                    (8, '401', 'Sala Chemioterapii Dziennej'),
-                    (9, 'IZO-1', 'Izolatka ze śluzą podciśnieniową'),
-                    (12, 'BL-01', 'Sala operacyjna główna'),
-                    (12, 'BL-02', 'Sala operacyjna "ostra"'),
-                    (12, 'POP-1', 'Sala wybudzeń (Post-Anesthesia Care Unit)'),
-                    (15, 'NCH-BL', 'Sala operacyjna neurochirurgiczna (z mikroskopem)'),
-                    (17, 'POL-01', 'Sala porodowa rodzinna'),
-                    (17, 'CC-01', 'Sala Cięć Cesarskich');
-
-
-            </code></pre>
+            <h2>Skrypt inicjalizujący bazę danych</h2>
+            <p>Plik: <code>szpital_skrypt_inicjalizujacy.sql</code></p>
+            <p>Plik zawiera skrypt inicjalizujący bazę danych Szpital. Po uruchomieniu go w Microsoft SQL Server utworzą się tabele oraz zostaną wypełnione danymi. Skrypt został wygenerowany za pomocą narzędzia Microsoft SQL Server na utworzonej bazie danych Szpital.</p>
+            
             <div class="opis2">
                 <a href="tworzenie_bazy.zip" download class="download-btn">
                     Pobierz Kod
@@ -388,29 +318,87 @@
 
         <section id="sekcja7">
             <h2>Zapytania, procedury i funkcje</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat similique a inventore iure repellat in fugiat culpa dignissimos, dicta nostrum aliquid, dolore, tempore corrupti eius! Ex iure odit suscipit at?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quis ad illo! Voluptates, totam labore. Explicabo, tempora temporibus voluptas vitae iure non blanditiis eos adipisci asperiores? Consequuntur illo ab quo.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ex incidunt voluptas itaque numquam quos esse dolorum, harum, autem quibusdam repudiandae, dolor sint impedit! Magni debitis tempore fugit voluptatibus libero?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illum, perspiciatis tempore asperiores similique cumque, soluta quibusdam dicta earum, labore minus quia? Natus commodi nostrum ab exercitationem quos ad nisi?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium culpa vitae consequuntur at reprehenderit! Ex, sed, sapiente voluptates voluptatem velit ipsa soluta rerum, tenetur cupiditate perferendis aut dicta perspiciatis sequi.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis cum sapiente aut ducimus. Consectetur ratione nulla, nobis distinctio labore quia illum! Quas, veniam? Officiis aliquid ab ipsum minus culpa aut.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam pariatur quia ea quam unde delectus perferendis inventore blanditiis culpa nostrum, odit itaque? Veniam molestiae, suscipit ducimus assumenda voluptatum neque nobis.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus, atque, quos nihil cupiditate blanditiis quidem tempora itaque quae iste soluta sit dolore ipsum eligendi ab magnam ipsa, esse nesciunt.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt consequatur eveniet excepturi eum distinctio unde et tenetur dignissimos magni, cum facilis a delectus beatae, itaque exercitationem consectetur facere enim similique?</p>
+            <h3>Zapytania DQL - raporty i agregacje</h3>
+        <p>
+            Plik: <code>raport.sql</code><br>
+            Plik: <code>grupowanie_danych.sql</code><br>
+            Plik: <code>okna_danych.sql</code>
+        </p>
+        <p>W projekcie wykorzystane zostały następujące mechanizmy generowania raportów i agregacji:</p>
+        <ul>
+            <li><strong>Eksport do XML / JSON:</strong> Zapytania z klauzulami <code>FOR XML AUTO, ELEMENTS</code> oraz <code>FOR JSON PATH</code>, generujące gotową historię wizyt pacjentów do formatów wymiany danych z systemami zewnętrznymi.</li>
+            <li><strong>Agregacje i grupowanie:</strong> Raport dotyczący analizy obłożenia placówki w czasie, który za pomocą funkcji <code>YEAR()</code> i <code>MONTH()</code> oraz instrukcji <code>CASE</code> zlicza zakończone wizyty w podziale na poszczególne miesiące.</li>
+            <li><strong>Funkcje okna:</strong> Zastosowane zostały zaawansowane funkcje analityczne: <code>RANK() OVER</code> do tworzenia rankingu wizyt danego pacjenta oraz <code>LAG()</code> wraz z <code>DATEDIFF()</code> do wyliczania liczby dni, jaka upłynęła od poprzedniej wizyty pacjenta w placówce.</li>
+        </ul>
+
+        <h3>Procedury składowane i funkcje</h3>
+        <p>
+            Plik: <code>dodanie_rekordow.sql</code><br>
+            Plik: <code>funkcja_skalarna.sql</code>
+        </p>
+        <p>W projekcie Szpital wykorzystane zostały procedury składowane (<code>GenerujPacjentow</code>, <code>GenerujPracownikow</code>, <code>UzupełnijKontaPracownikow</code>) i funkcja skalarna:</p>
+        <ul>
+            <li><strong>Procedura GenerujPacjentow:</strong> Jej celem jest zautomatyzowane generowanie testowych danych pacjentów (mock data). Skrypt losuje płeć, dobiera odpowiednie imię i nazwisko ze słownika oraz generuje unikalny PESEL i numer telefonu. Parametry wejściowe: <code>@ile (INT)</code> – określona przez użytkownika liczba rekordów do wygenerowania. Wynikiem działania jest wstawienie podanej liczby nowych wierszy bezpośrednio do tabeli <code>PACJENT</code>. Przykład użycia: <code>EXEC dbo.GenerujPacjentow 20;</code></li>
+            <li><strong>Procedura UzupełnijKontaPracownikow:</strong> Jej celem jest generowanie poświadczeń logowania dla personelu. Skrypt iteruje po pracownikach wyższego szczebla za pomocą kursora, tworzy dla nich loginy i bezpiecznie szyfruje domyślne hasła przy użyciu algorytmu SHA-256. Nie posiada danych wejściowych, pobiera dane dynamicznie z bazy. Wynikiem jej działania jest wstawienie nowych rekordów do tabeli <code>UZYTKOWNIK</code> oraz zaktualizowanie kluczy obcych <code>pr_uzytkownik_id</code> w tabeli <code>PRACOWNIK</code>. Przykład użycia: <code>EXEC dbo.UzupełnijKontaPracownikow;</code></li>
+            <li><strong>Funkcja skalarna:</strong> <code>fn_LiczbaZakonczonychWizytPacjenta</code> - zlicza ilość zrealizowanych wizyt przez pacjentów. Parametry wejściowe: <code>@PacjentID (INT)</code> – unikalny identyfikator pacjenta. Wynik działania: Wartość liczbowa całkowita <code>(INT)</code> określająca liczbę wizyt.</li>
+        </ul>
         </section>
 
 
         <section id="sekcja8">
             <h2>Mechanizmy bezpieczeństwa i administracji</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat similique a inventore iure repellat in fugiat culpa dignissimos, dicta nostrum aliquid, dolore, tempore corrupti eius! Ex iure odit suscipit at?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quis ad illo! Voluptates, totam labore. Explicabo, tempora temporibus voluptas vitae iure non blanditiis eos adipisci asperiores? Consequuntur illo ab quo.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ex incidunt voluptas itaque numquam quos esse dolorum, harum, autem quibusdam repudiandae, dolor sint impedit! Magni debitis tempore fugit voluptatibus libero?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illum, perspiciatis tempore asperiores similique cumque, soluta quibusdam dicta earum, labore minus quia? Natus commodi nostrum ab exercitationem quos ad nisi?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium culpa vitae consequuntur at reprehenderit! Ex, sed, sapiente voluptates voluptatem velit ipsa soluta rerum, tenetur cupiditate perferendis aut dicta perspiciatis sequi.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis cum sapiente aut ducimus. Consectetur ratione nulla, nobis distinctio labore quia illum! Quas, veniam? Officiis aliquid ab ipsum minus culpa aut.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam pariatur quia ea quam unde delectus perferendis inventore blanditiis culpa nostrum, odit itaque? Veniam molestiae, suscipit ducimus assumenda voluptatum neque nobis.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus, atque, quos nihil cupiditate blanditiis quidem tempora itaque quae iste soluta sit dolore ipsum eligendi ab magnam ipsa, esse nesciunt.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt consequatur eveniet excepturi eum distinctio unde et tenetur dignissimos magni, cum facilis a delectus beatae, itaque exercitationem consectetur facere enim similique?</p>
+            <h3>Widoki</h3>
+            <p>Plik: <code>perspektywy.sql</code></p>
+            <p>W bazie Szpital zaimplementowano widoki systemowe (views). Pełnią one rolę wirtualnych tabel, które filtrują i łączą informacje z wielu miejsc, ukrywając jednocześnie dane wrażliwe.</p>
+            <ul>
+                <li><strong>Perspektywa Recepcji (<code>vw_Recepcja_Wizyty</code>):</strong><br>
+                Jej celem jest usprawnienie pracy personelu na recepcji szpitala oraz ochrona danych medycznych pacjenta. Widok łączy tabele <code>WIZYTA</code>, <code>PACJENT</code>, <code>PRACOWNIK</code> oraz <code>SALA</code>. Wyświetla wyłącznie dane organizacyjne (imię i nazwisko pacjenta, PESEL, przydzielonego lekarza, numer sali oraz datę i status wizyty). Cechą kluczową tego widoku jest całkowite odcięcie pracownika recepcji od tabel medycznych – recepcjonista nie ma możliwości wglądu w diagnozy, schorzenia, wystawione recepty czy skierowania pacjenta.</li>
+                <li><strong>Perspektywa Kadr (<code>vw_Kadry_Zatrudnienie</code>):</strong><br>
+                Jej celem jest złączenie danych pracowniczych dla działu HR z jednoczesnym ukryciem mechanizmów autoryzacji. Widok zestawia informacje z tabel <code>PRACOWNIK</code>, <code>STANOWISKO</code> i <code>ODDZIAL</code>. Dodatkowo, w locie wykorzystuje funkcję skalarną <code>fn_ObliczStazPracy</code>, aby na bieżąco prezentować aktualny staż pracy każdego pracownika w latach. Zestawienie prezentuje stanowiska i pensje, ale celowo omija kolumny powiązane z tabelą <code>UZYTKOWNIK</code>. Dzięki temu dział kadr ma pełen obraz zatrudnienia, ale nie ma dostępu do loginów systemowych, ról ani zahaszowanych haseł personelu.</li>
+            </ul>
+
+            <h2>Role i uprawnienia</h2>
+            <p>Plik: <code>role.sql</code></p>
+            <p>Baza danych posiada trzy role systemowe:</p>
+            <ul>
+                <li><strong>Rola_Admin:</strong> Przeznaczona dla personelu zarządzającego (dyrekcja, dział IT, kadry, recepcja). Posiada uprawnienia operacyjne (tworzenie kont <code>UZYTKOWNIK</code>, aktualizacja danych w tabeli <code>PRACOWNIK</code> i <code>PACJENT</code>), a także dostęp do widoków kadrowych i recepcyjnych. Rolę tę pozbawiono możliwości bezpośredniej modyfikacji danych medycznych (<code>DENY INSERT, UPDATE, DELETE</code> na tabelach <code>DIAGNOZA</code> czy <code>RECEPTA</code>).</li>
+                <li><strong>Rola_Lekarz:</strong> Profil o charakterze medycznym. Daje pracownikowi pełen dostęp operacyjny do tabel związanych z historią leczenia pacjenta (<code>WIZYTA</code>, <code>DIAGNOZA</code>, <code>RECEPTA</code>, <code>SKIEROWANIE</code>). Jednocześnie rola ta ma zablokowany dostęp do edycji danych kadrowych i zarządzania kontami innych użytkowników.</li>
+                <li><strong>Rola_Pacjent:</strong> Profil przeznaczony tylko do odczytu. Pozwala na tworzenie zapytań do bazy danych w celu wyświetlenia historii własnych wizyt, e-recept i e-skierowań. Za pomocą polecenia <code>DENY</code> całkowicie zablokowano pacjentom możliwość wykonywania operacji <code>INSERT</code>, <code>UPDATE</code> oraz <code>DELETE</code> na jakichkolwiek tabelach.</li>
+            </ul>
+
+            <h2>Triggery</h2>
+            <p>
+                Plik: <code>trigger_logi.sql</code><br>
+                Plik: <code>zaawansowane_triggery.sql</code>
+            </p>
+            <p>Baza zawiera następujące triggery:</p>
+            <ul>
+                <li><strong>Śledzenie zmian w harmonogramie - sprawdzanie modyfikacji wizyt:</strong> Zaimplementowano triger <code>trg_WizytaUpdateLog</code> działający w trybie <code>AFTER UPDATE</code> na tabeli <code>WIZYTA</code>. Pełni on funkcję automatycznego dziennika zdarzeń (logu). Skrypt wykorzystuje wirtualne tabele <code>inserted</code> (nowe dane) oraz <code>deleted</code> (stare dane), łącząc je i precyzyjnie porównując. Jeśli system wykryje, że zmianie uległy kluczowe informacje – takie jak status wizyty lub jej termin (<code>w_data_godzina</code>) – wyzwalacz w tle zapisuje historyczne i zaktualizowane wartości do dedykowanej tabeli <code>WIZYTY_LOGI</code>.</li>
+            </ul>
+
+            <p>Triggery obejmujące śledzenie historii:</p>
+            <ul>
+                <li><strong><code>trg_StanowiskaPensjaAudit</code>:</strong> Monitoruje zmiany w tabeli <code>STANOWISKO</code>. Używając funkcji <code>UPDATE(st_pensja)</code>, sprawdza, czy modyfikacja dotyczyła wynagrodzenia, a następnie zapisuje do tabeli <code>PensjaAudit</code> kwotę przed i po zmianie, aby zapobiec cichym, nieautoryzowanym podwyżkom.</li>
+                <li><strong><code>trg_PacjentColumnsAudit</code>:</strong> Rejestruje modyfikacje danych osobowych w tabeli <code>PACJENT</code>.</li>
+            </ul>
+
+            <p>Triggery odpowiadające za blokowanie błędnych danych: Działają jako <code>INSTEAD OF INSERT</code>, przejmują operację wstawiania i najpierw sprawdzają dane.</p>
+            <ul>
+                <li><strong><code>trg_WizytyValidation</code>:</strong> Wyświetla błąd, jeśli ktoś próbuje zaplanować wizytę w czasie, który już minął - podanie daty z przeszłości.</li>
+                <li><strong><code>trg_StanowiskaInsertValidation</code>:</strong> Uniemożliwia próby zdefiniowania ujemnej pensji.</li>
+                <li><strong><code>trg_ReceptyComplexControl</code>:</strong> Trigger sprawdzający e-recepty. Odstępuje od dodania recepty, jeśli brakuje na niej wypisanych leków, data jest z przyszłości lub wskazana diagnoza nie istnieje.</li>
+            </ul>
+
+            <p>Logika biznesowa:</p>
+            <ul>
+                <li><strong><code>trg_BlockWizytaPatientChange</code>:</strong> Trigger chroni spójność historii medycznej. Pokazuje wyjątek, jeśli ktoś chce podmienić przypisanego pacjenta (<code>w_pacjent_id</code>) w istniejącej i zakończonej już wizycie.</li>
+                <li><strong><code>trg_StanowiskaPensjaCorrection</code>:</strong> Zabezpiecza bazę przed nieskończoną pętlą za pomocą <code>TRIGGER_NESTLEVEL()</code>. Automatycznie koryguje i wyrównuje wstawianą pensję do pułapu najniższej krajowej (4300 zł), jeśli wpisano kwotę niższą.</li>
+            </ul>
+
+            <p>Trigger serwerowy:</p>
+            <ul>
+                <li><strong><code>trg_DDL_Klinika_Audit</code>:</strong> Założony na poziomie całej bazy danych. Używając funkcji <code>EVENTDATA()</code>, przechwytuje zapytania tworzące nowe tabele i zapisuje ich strukturę oraz dokładny kod T-SQL do specjalnego logu XML. Jest narzędziem dla administratora.</li>
+            </ul>
         </section>
 
 
