@@ -44,11 +44,16 @@
         <a href="#sekcja2" onclick="spis.close()">Diagram przypadków użycia</a>
         <a href="#sekcja3" onclick="spis.close()">Diagram ERD</a>
         <a href="#sekcja4" onclick="spis.close()">Encje</a>
-        <a href="#sekcja5" onclick="spis.close()">Słowniki danych</a>
-        <a href="#sekcja6" onclick="spis.close()">Implementacja</a>
-        <a href="#sekcja7" onclick="spis.close()">Zapytania, procedury i funkcje</a>
-        <a href="#sekcja8" onclick="spis.close()">Mechanizmy bezpieczeństwa i administracji</a>
-        <a href="#sekcja9" onclick="spis.close()">Pobierz ZIP 🐈</a>
+        <a href="#sekcja5" onclick="spis.close()">Opis relacji w bazie danych</a>
+        <a href="#sekcja6" onclick="spis.close()">Aspekty, których projekt nie obejmuje</a>
+        <a href="#sekcja7" onclick="spis.close()">Słowniki danych</a>
+        <a href="#sekcja8" onclick="spis.close()">Uzasadnienie najważniejszych decyzji projektowych</a>
+        <a href="#sekcja9" onclick="spis.close()">Model architektury systemu</a>
+        <a href="#sekcja10" onclick="spis.close()">Implementacja</a>
+        <a href="#sekcja11" onclick="spis.close()">Zapytania, procedury i funkcje</a>
+        <a href="#sekcja12" onclick="spis.close()">Transakcje</a>
+        <a href="#sekcja13" onclick="spis.close()">Mechanizmy bezpieczeństwa i administracji</a>
+        <a href="#sekcja14" onclick="spis.close()">Pobierz ZIP 🐈</a>
     </nav>
     <div class="batony1">
     <button onclick="spis.close()">Zamknij</button>
@@ -63,7 +68,7 @@
 
     <div class="dok">
         <section id="sekcja1">
-            <h2>Funkcjonalności realizowane przez system: </h2>
+            <h2>Funkcjonalności realizowane przez aplikację, która opiera się na bazie danych Szpital: </h2>
             <ul>
             <!-- <li>Funkcjonalności realizowane przez system:</li> -->
             <li>Rejestracja i logowanie pacjenta</li>
@@ -93,7 +98,6 @@
 
         <section id="sekcja4">
             <h2>Encje</h2>
-            <h3>Skrypt inicjujący strukturę tabel w bazie danych Szpital został wykonany w SQL Server Management Studio.</h3>
             <h3>Rdzeniem bazy jest tabela WIZYTA, ponieważ celem szpitala jest przyjmowanie pacjentów na wizyty w celu weryfikacji ich zdrowia. Encja ta jest powiązana z encjami  PACJENT, PRACOWNIK i SALA a także tylko dzięki zrealizowanej wizycie jest możliwe stawianie diagnoz i wystawienie recept przez lekarzy. </h3>
             <div class="opis1">
         
@@ -152,8 +156,33 @@
 
         </section>
 
-
         <section id="sekcja5">
+            <h2>Opis relacji w bazie danych</h2>
+            <p>Relacje 1:N (Jeden do wielu):</p>
+            <ul>
+                <li>Pracownik (Lekarz) może przeprowadzić wiele wizyt, ale jedna wizyta jest prowadzona przez jednego Lekarza.</li>
+                <li>Pacjent może odbyć wiele Wizyt, ale konkretna Wizyta dotyczy tylko jednego pacjenta.</li>
+                <li>Wizyta może skutkować wydaniem kilku diagnoz (np. gdy pacjent ma choroby współistniejące).</li>
+            </ul>
+
+            <p>Relacje 1:1 (Jeden do jednego):</p>
+            <ul>
+                <li>Użytkownik systemu jest powiązany z konkretnym pracownikiem lub pacjentem.<br>
+                Oddzielenie tabeli <code>UZYTKOWNIK</code> od danych osobowych ułatwia zarządzanie autoryzacją.</li>
+            </ul>
+        </section>
+
+        <section id="sekcja6">
+            <h2>Aspekty, których projekt nie obejmuje</h2>
+            <ul>
+                <li>Modułu księgowego i finansowego (rozliczenia z NFZ, fakturowanie).</li>
+                <li>Modułu magazynowego apteki szpitalnej (śledzenia dokładnych stanów magazynowych leków).</li>
+                <li>Zintegrowanego systemu laboratoryjnego (szczegółowych wyników badań krwi, obrazowych itp.).</li>
+            </ul>
+        </section>
+
+
+        <section class="imgg" id="sekcja7">
             <h2>Słowniki danych</h2>
             <p>Tabela ODDZIAL</p>
             <img src="img/slownik_oddzial.png" alt="Słownik ODDZIAL">
@@ -181,107 +210,33 @@
             <img src="img/slownik_recepta.png" alt="Słownik RECEPTA">
         </section>
 
-        <section id="sekcja6">
-            <h2>Kod do stworzenia bazy w MS SQL Server</h2>
-            <pre><code>
-                CREATE DATABASE Szpital;
-                USE Szpital;
+        <section id="sekcja8">
+            <h2>Uzasadnienie najważniejszych decyzji projektowych</h2>
+            <ul>
+                <li><strong>1. Autogenerowanie kluczy (<code>IDENTITY</code>):</strong><br>
+                Do wszystkich kluczy głównych użyto autoincrementacji (<code>IDENTITY(1,1)</code>). Uniezależnia to bazę od logiki aplikacji i eliminuje ryzyko duplikatów przy zbiegach operacji <code>INSERT</code>.</li>
+                <br>
+                <li><strong>2. Tabele audytowe i logi:</strong><br>
+                Zamiast nadpisywać i tracić historię edycji, zaprojektowano osobne tabele logów (np. <code>WIZYTY_LOGI</code>, <code>PensjaAudit</code>). Obsługiwane są one przez Triggery bazodanowe (wyzwalacze). Pozwala to śledzić zmiany wrażliwych danych medycznych.</li>
+                <br>
+                <li><strong>3. Standaryzacja danych (Słowniki):</strong><br>
+                Takie dane jak nazwy stanowisk, nazwy oddziałów czy schorzenia wyniesiono do osobnych tabel słownikowych. Zapobiega to literówkom i niespójnościom.</li>
+                <br>
+                <li><strong>4. Więzy integralności i defaults:</strong><br>
+                Użyto constraintów typu <code>UNIQUE</code> np. dla numeru PESEL oraz wartości domyślnych (<code>DEFAULT GETDATE()</code> dla dat), co zapewnia podstawową walidację.</li>
+            </ul>
+        </section>
 
-                CREATE TABLE ODDZIAL (
-                    od_id INT IDENTITY(1,1) PRIMARY KEY,
-                    od_nazwa NVARCHAR(100) NOT NULL
-                );
+        <section class="imgg" id="sekcja9">
+            <h2>Model architektury systemu</h2>
+            <img src="img/model_architektury.png" alt="Model architektury systemu">
+        </section>
 
-                CREATE TABLE STANOWISKO (
-                    st_id INT IDENTITY(1,1) PRIMARY KEY,
-                    st_nazwa NVARCHAR(50) NOT NULL,
-                    st_pensja DECIMAL(10, 2)
-                );
-
-                CREATE TABLE CHOROBA (
-                    ch_id INT IDENTITY(1,1) PRIMARY KEY,
-                    ch_nazwa NVARCHAR(100) NOT NULL
-                );
-
-                CREATE TABLE SALA (
-                    s_id INT IDENTITY(1,1) PRIMARY KEY,
-                    s_oddzial_id INT NOT NULL REFERENCES ODDZIAL(od_id),
-                    s_numer NVARCHAR(10) NOT NULL,
-                    s_rola NVARCHAR(50)
-                );
-
-                CREATE TABLE UZYTKOWNIK (
-                    u_id INT IDENTITY(1,1) PRIMARY KEY,
-                    u_login NVARCHAR(50) UNIQUE NOT NULL,
-                    u_haslo_hash NVARCHAR(255) NOT NULL,
-                    u_rola NVARCHAR(20) NOT NULL CHECK (u_rola IN ('admin', 'lekarz', 'pacjent'))
-                );
-
-                CREATE TABLE PRACOWNIK (
-                    pr_id INT IDENTITY(1,1) PRIMARY KEY,
-                    pr_imie NVARCHAR(50) NOT NULL,
-                    pr_nazwisko NVARCHAR(50) NOT NULL,
-                    pr_stanowisko_id INT NOT NULL REFERENCES STANOWISKO(st_id),
-                    pr_oddzial_id INT NOT NULL REFERENCES ODDZIAL(od_id),
-                    pr_data_zatrudnienia DATE NOT NULL default getdate(),
-                    pr_uzytkownik_id INT UNIQUE REFERENCES UZYTKOWNIK(u_id)
-                );
-
-                CREATE TABLE PACJENT (
-                    p_id INT IDENTITY(1,1) PRIMARY KEY,
-                    p_imie NVARCHAR(50) NOT NULL,
-                    p_nazwisko NVARCHAR(50) NOT NULL,
-                    p_pesel NVARCHAR(11) UNIQUE NOT NULL,
-                    p_nr_tel NVARCHAR(15),
-                    p_adres NVARCHAR(300),
-                    p_uzytkownik_id INT UNIQUE REFERENCES UZYTKOWNIK(u_id)
-
-                );
-
-                CREATE TABLE WIZYTA (
-                    w_id INT IDENTITY(1,1) PRIMARY KEY,
-                    w_pacjent_id INT NOT NULL REFERENCES PACJENT(p_id),
-                    w_lekarz_id INT NOT NULL REFERENCES PRACOWNIK(pr_id),
-                    w_sala_id INT REFERENCES SALA(s_id),
-                    w_data_godzina DATETIME NOT NULL,
-                    w_status NVARCHAR(20) DEFAULT 'umówiona'
-                );
-
-
-                CREATE TABLE GRAFIK (
-                    g_id INT IDENTITY(1,1) PRIMARY KEY,
-                    g_pracownik_id INT NOT NULL REFERENCES PRACOWNIK(pr_id),
-                    g_sala_id INT NOT NULL REFERENCES SALA(s_id),
-                    g_start DATETIME NOT NULL,
-                    g_koniec DATETIME NOT NULL
-                );
-
-
-                CREATE TABLE SKIEROWANIE (
-                    ski_id INT IDENTITY(1,1) PRIMARY KEY,
-                    ski_pacjent_id INT NOT NULL REFERENCES PACJENT(p_id) ,
-                    ski_lekarz_id INT NOT NULL REFERENCES PRACOWNIK(pr_id),
-                    ski_do_specjalisty NVARCHAR(100) NOT NULL,
-                    ski_data_wystawienia DATE NOT NULL DEFAULT GETDATE()
-                );
-
-                CREATE TABLE DIAGNOZA (
-                    dia_id INT IDENTITY(1,1) PRIMARY KEY,
-                    dia_wizyta_id INT NOT NULL REFERENCES WIZYTA(w_id),
-                    dia_choroba_id INT NOT NULL REFERENCES CHOROBA(ch_id),
-                    dia_opis NVARCHAR(2500)
-                );
-
-
-                CREATE TABLE RECEPTA (
-                    r_id INT IDENTITY(1,1) PRIMARY KEY,
-                    r_diagnoza_id INT NOT NULL REFERENCES DIAGNOZA(dia_id),
-                    r_leki NVARCHAR(1300) NOT NULL,
-                    r_data_wystawienia DATE NOT NULL DEFAULT GETDATE()
-                );
-
-            </code></pre>
-            <h2>Wstawianie danych do tabel</h2>
+        <section id="sekcja10">
+            <h2>Implementacja</h2>
+            <p>Skrypt tworzący strukturę tabel w bazie danych Szpital został wykonany w SQL Server Management Studio.</p>
+            <p>Plik: <code>tworzenie_tabel.sql</code></p>
+            <h3>Wstawianie danych do tabel</h3>
             <p>Plik: <code>dodanie_rekordow.sql</code></p>
             <p>Wstawianie rekordów zostało podzielone na cztery etapy:</p>
             <ul>
@@ -298,19 +253,37 @@
                 Ich rekordy zostały wstawione za pomocą polecenia <code>INSERT INTO</code>.</li>
             </ul>
 
-            <h2>Skrypt inicjalizujący bazę danych</h2>
+            <h3>Skrypt inicjalizujący bazę danych</h3>
             <p>Plik: <code>szpital_skrypt_inicjalizujacy.sql</code></p>
             <p>Plik zawiera skrypt inicjalizujący bazę danych Szpital. Po uruchomieniu go w Microsoft SQL Server utworzą się tabele oraz zostaną wypełnione danymi. Skrypt został wygenerowany za pomocą narzędzia Microsoft SQL Server na utworzonej bazie danych Szpital.</p>
             
-            
+            <h3>Więzy integralności</h3>
+            <p>W celu ochrony spójności bazy danych na poziomie silnika, poza standardowymi relacjami kluczy obcych (<code>FOREIGN KEY</code>), zaimplementowano szereg więzów integralności. Najważniejsze z nich to:</p>
+            <ul>
+                <li><strong>Więzy unikalności - UNIQUE:</strong> Nałożone na kolumnę <code>p_pesel</code> w tabeli <code>PACJENT</code> oraz <code>u_login</code> w tabeli <code>UZYTKOWNIK</code>, zapobiegające duplikacji kont i danych osobowych.</li><br>
+                <li><strong>Więzy sprawdzające - CHECK:</strong> Wymuszające poprawne wartości logiczne, np. w tabeli <code>UZYTKOWNIK</code> upewniające się, że rola to tylko dopuszczalne wartości: <code>CHECK (u_rola IN ('admin', 'lekarz', 'pacjent'))</code>.</li><br>
+                <li><strong>Wartości domyślne - DEFAULT:</strong> Automatyzujące wprowadzanie danych, np. <code>DEFAULT GETDATE()</code> dla kolumn z datą wystawienia recepty lub skierowania.</li>
+            </ul>
+
+            <h3>Przykładowe dane testowe</h3>
+            <p>Dzięki zastosowaniu procedur generujących, baza została wypełniona realistycznymi danymi testowymi. Poniżej znajduje się przykład wygenerowanych rekordów dla pacjentów:</p>
+            <img src="img/rekordy_pacjenci.png" alt="Dane z tabeli pacjenci">
+
+            <h3>Kolejność uruchamiania skryptów</h3>
+            <p>Aby poprawnie zainicjalizować strukturę bazy danych Szpital i uniknąć błędów związanych z brakiem wymaganych obiektów (np. próbą wstawienia danych do nieistniejącej tabeli), skrypty należy uruchamiać w następującej kolejności:</p>
+            <ol>
+                <li><code>tworzenie_tabel.sql</code> – utworzenie schematu bazy danych, definicja tabel, kluczy głównych i obcych.</li>
+                <li><code>dodanie_rekordow.sql</code> – wywołanie procedur generujących dane i zasilenie tabel informacjami testowymi.</li>
+                <li><code>funkcja_skalarna.sql</code> – utworzenie funkcji (<code>fn_LiczbaZakonczonychWizytPacjenta</code>), która będzie potrzebna do działania widoków i procedur.</li>
+                <li><code>perspektywy.sql</code> – utworzenie widoków dla recepcji i kadr.</li>
+                <li><code>trigger_logi.sql</code> oraz <code>zaawansowane_triggery.sql</code> – nałożenie triggerów audytowych i walidacyjnych na wypełnione tabele.</li>
+                <li><code>role.sql</code> – utworzenie ról systemowych i nadanie uprawnień dla użytkowników.</li>
+            </ol>
+            <p><em>Alternatywnie: Można jednorazowo uruchomić plik <code>szpital_skrypt_inicjalizujacy.sql</code>, który inicjalizuje bazę i wypełnia ją danymi.</em></p>
+                        
         </section>
 
-
-        
-
-
-
-        <section id="sekcja7">
+        <section id="sekcja11">
             <h2>Zapytania, procedury i funkcje</h2>
             <h3>Zapytania DQL - raporty i agregacje</h3>
         <p>
@@ -338,8 +311,24 @@
         </ul>
         </section>
 
+        <section id="sekcja12">
+            <h2>Transakcje</h2>
+            <p>
+                Plik: <code>transakcje.sql</code><br>
+                Plik: <code>transakacja_obsluga_bledow.sql</code>
+            </p>
+            <p>Aby zapewnić integralność danych i odporność systemu na awarie, w bazie zaimplementowano transakcje oraz bloki strukturalnej obsługi błędów (<code>TRY...CATCH</code>). Chronią one bazę przed wprowadzaniem częściowych lub uszkodzonych informacji.</p>
+            <ul>
+                <li><strong>Transakcja z punktami zapisu:</strong> Zastosowano mechanizm <code>SAVE TRAN</code> podczas jednoczesnego dodawania nowego oddziału (<code>ODDZIAL</code>) oraz powiązanych z nim sal szpitalnych z tabeli <code>SALA</code>. W przypadku wystąpienia błędu na etapie przypisywania sali (np. zły numer, błąd naruszenia klucza), system wycofuje się tylko do punktu zapisu. Dzięki temu oddział zostaje poprawnie zapisany w bazie, a wycofywana jest wyłącznie błędna sala. Zapobiega to całkowitemu przerwaniu długich procesów wprowadzania danych.</li>
+                <br>
+                <li><strong>Bezpieczne przechwytywanie wyjątków i logowanie awarii:</strong> Baza posiada transakcję wstawiającą nową wizytę lekarską, zabezpieczoną blokiem <code>TRY...CATCH</code>. Skrypt celowo symuluje błąd biznesowy (próba przypisania wizyty do nieistniejącego pacjenta o ID 99999, co narusza klucz obcy). Zamiast wyświetlać użytkownikowi komunikat błędu, system płynnie przechodzi do sekcji <code>CATCH</code>, sprawdza stan uszkodzenia transakcji za pomocą funkcji <code>XACT_STATE()</code>, wykonuje bezpieczny <code>ROLLBACK</code>, a na końcu zapisuje szczegóły problemu (datę oraz treść systemowego komunikatu z <code>ERROR_MESSAGE()</code>) do dedykowanej tabeli technicznej Bledy.</li>
+                <br>
+                <li><strong>Transakcja powiązana:</strong> Zaimplementowano skrypt realizujący proces zapisu nowej wizyty i przypisania do niej diagnozy w ramach jednego bloku <code>BEGIN TRANSACTION</code>. Skrypt ten testuje zachowanie bazy w przypadku naruszenia więzów spójności np. wstawienie diagnozy z kodem choroby 99999, który nie istnieje w słowniku <code>CHOROBA</code>. System działa zgodnie z zasadą "wszystko albo nic" (atomowość). Gdy wstawienie diagnozy kończy się błędem, skrypt płynnie przechodzi do bloku <code>CATCH</code>. Tam, po upewnieniu się, że transakcja jest nadal otwarta (za pomocą zmiennej systemowej <code>@@TRANCOUNT > 0</code>), następuje jej całkowite wycofanie (<code>ROLLBACK</code>). Oznacza to, że z bazy usuwana jest również sama wizyta (mimo że jej <code>INSERT</code> wykonał się poprawnie), co chroni system przed powstawaniem "pustych", osieroconych rekordów. Dodatkowo skrypt posiada również obsługę wyjątków.</li>
+            </ul>
+        </section>
 
-        <section id="sekcja8">
+
+        <section id="sekcja13">
             <h2>Mechanizmy bezpieczeństwa i administracji</h2>
             <h3>Widoki</h3>
             <p>Plik: <code>perspektywy.sql</code></p>
@@ -351,7 +340,7 @@
                 Jej celem jest złączenie danych pracowniczych dla działu HR z jednoczesnym ukryciem mechanizmów autoryzacji. Widok zestawia informacje z tabel <code>PRACOWNIK</code>, <code>STANOWISKO</code> i <code>ODDZIAL</code>. Dodatkowo, w locie wykorzystuje funkcję skalarną <code>fn_ObliczStazPracy</code>, aby na bieżąco prezentować aktualny staż pracy każdego pracownika w latach. Zestawienie prezentuje stanowiska i pensje, ale celowo omija kolumny powiązane z tabelą <code>UZYTKOWNIK</code>. Dzięki temu dział kadr ma pełen obraz zatrudnienia, ale nie ma dostępu do loginów systemowych, ról ani zahaszowanych haseł personelu.</li>
             </ul>
 
-            <h2>Role i uprawnienia</h2>
+            <h3>Role i uprawnienia</h3>
             <p>Plik: <code>role.sql</code></p>
             <p>Baza danych posiada trzy role systemowe:</p>
             <ul>
@@ -360,7 +349,7 @@
                 <li><strong>Rola_Pacjent:</strong> Profil przeznaczony tylko do odczytu. Pozwala na tworzenie zapytań do bazy danych w celu wyświetlenia historii własnych wizyt, e-recept i e-skierowań. Za pomocą polecenia <code>DENY</code> całkowicie zablokowano pacjentom możliwość wykonywania operacji <code>INSERT</code>, <code>UPDATE</code> oraz <code>DELETE</code> na jakichkolwiek tabelach.</li>
             </ul>
 
-            <h2>Triggery</h2>
+            <h3>Triggery</h3>
             <p>
                 Plik: <code>trigger_logi.sql</code><br>
                 Plik: <code>zaawansowane_triggery.sql</code>
@@ -396,7 +385,7 @@
         </section>
 
         
-        <section id="sekcja9">
+        <section id="sekcja14">
             <h2>Plik ZIP</h2>
             
             <div class="opis2">
