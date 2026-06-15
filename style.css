@@ -434,35 +434,34 @@ code {
 
 
 
-#topBtn{
-  all: unset;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-  background: rgba(0,0,0,0.25);
-  color: white;
-  cursor: pointer;
-
-  opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-  transition: 0.25s ease;
+#topBtn {
+    /* Zmieniamy all: unset na jawne wyzerowanie potrzebnych wartości */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white; /* Dodane obramowanie, aby był widoczny */
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5); /* Lekko ciemniejsze tło */
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: 0.25s ease;
+    z-index: 1000; /* Zapewnia, że przycisk będzie nad innymi elementami */
 }
 
 #topBtn:hover {
-  background: rgba(0, 0, 0, 0.35);
-  transform: translateY(0) scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(0) scale(1.1);
 }
 
 #topBtn.show {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
