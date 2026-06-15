@@ -432,3 +432,37 @@ code {
 }
 
 
+
+
+#topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(0, 0, 0, 0.15);
+  color: white;
+
+  font-size: 18px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+
+  transition: 0.25s ease;
+}
+
+#topBtn:hover {
+  background: rgba(0, 0, 0, 0.35);
+  transform: scale(1.1);
+}
+
+#topBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+}

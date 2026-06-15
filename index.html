@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    
+    <button id="topBtn">↑</button>
 
     <div class="wstep">
             <h1>Dokumentacja</h1>
@@ -429,6 +429,18 @@
     </div>
     </footer>
 
+    
+    <script>
+const btn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", () => {
+  btn.classList.toggle("show", window.scrollY > 300);
+});
+
+btn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
     
 
 </body>
